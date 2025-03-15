@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo "🚀 Instalando KDE Plasma 6 mínimo no Arch Linux..."
+
+# Atualizar o sistema
+sudo pacman -Syu --noconfirm
+
+# Instalar o KDE Plasma 6 mínimo
+sudo pacman -S --noconfirm plasma-desktop systemsettings kwin
+
+# Instalar suporte para Wayland
+sudo pacman -S --noconfirm qt6-wayland
+
+# Instalar gerenciador de login (SDDM)
+sudo pacman -S --noconfirm sddm
+sudo systemctl enable sddm
+
+# Instalar aplicativos básicos do KDE (opcional)
+read -p "Deseja instalar aplicativos básicos do KDE? (s/n): " resposta
+if [[ "$resposta" =~ ^[Ss]$ ]]; then
+    sudo pacman -S --noconfirm dolphin konsole
+fi
+
+echo "✅ Instalação concluída! Reinicie o sistema e faça login no KDE Plasma."
