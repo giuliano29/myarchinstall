@@ -1,24 +1,53 @@
 #!/bin/bash
 
-echo "🚀 Instalando KDE Plasma 6 mínimo no Arch Linux..."
+echo "🚀 Iniciando a instalação do KDE Plasma 6 mínimo no Arch Linux..."
 
-# Atualizar o sistema
+# Atualizar o sistema antes de instalar qualquer coisa
 sudo pacman -Syu --noconfirm
 
-# Instalar o KDE Plasma 6 mínimo
+# 1️⃣ Remover systemd-boot (se estiver instalado)
+if [ -d /boot/loader ]; then
+    echo "❌ Removendo systemd-boot..."
+    sudo bootctl remove
+    sudo rm -rf /boot/loader /boot/EFI/systemd
+fi
+
+# 2️⃣ Instalar e configurar o GRUB 2
+echo "🛠 Instalando e configurando GRUB 2..."
+sudo pacman -S --noconfirm grub efibootmgr
+sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# 3️⃣ Instalar Kernel Zen primeiro
+echo "🖥 Instalando Kernel Zen..."
+sudo pacman -S --noconfirm linux-zen linux-zen-headers
+
+# 4️⃣ Instalar KDE Plasma 6 mínimo
+echo "🎨 Instalando KDE Plasma 6 mínimo..."
 sudo pacman -S --noconfirm plasma-desktop systemsettings kwin
 
-# Instalar suporte para Wayland
-sudo pacman -S --noconfirm qt6-wayland
-
-# Instalar gerenciador de login (SDDM)
+# 5️⃣ Instalar gerenciador de login (SDDM)
+echo "🔑 Instalando e ativando SDDM..."
 sudo pacman -S --noconfirm sddm
 sudo systemctl enable sddm
 
-# Instalar aplicativos básicos do KDE (opcional)
-read -p "Deseja instalar aplicativos básicos do KDE? (s/n): " resposta
-if [[ "$resposta" =~ ^[Ss]$ ]]; then
-    sudo pacman -S --noconfirm dolphin konsole
-fi
+# 6️⃣ Instalar suporte a Wayland e X11 (XWayland Satellite)
+echo "🖥 Adicionando suporte a Wayland e XWayland..."
+sudo pacman -S --noconfirm qt6-wayland xwayland-satellite
 
-echo "✅ Instalação concluída! Reinicie o sistema e faça login no KDE Plasma."
+# 7️⃣ Instalar bibliotecas multimídia (GStreamer completo, ALSA, PulseAudio, etc.)
+echo "🎵 Instalando bibliotecas multimídia..."
+sudo pacman -S --noconfirm gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly \
+    gst-libav gst-plugin-pipewire \
+    lib32-gstreamer lib32-gst-plugins-base lib32-gst-plugins-good lib32-gst-plugins-bad lib32-gst-plugins-ugly \
+    lib32-gst-libav lib32-libpulse lib32-alsa-plugins lib32-alsa-lib libidn11 lib32-libidn11
+
+# 8️⃣ Instalar navegadores e aplicativos essenciais
+echo "🌍 Instalando navegadores e aplicativos..."
+sudo pacman -S --noconfirm firefox falkon gimp steam
+
+# 9️⃣ Atualizar GRUB após todas as mudanças
+echo "🔄 Atualizando GRUB..."
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "✅ Instalação concluída! Reinicie o sistema e selecione o Kernel Zen no boot para melhor desempenho."
