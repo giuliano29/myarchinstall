@@ -49,7 +49,11 @@ sudo pacman -S --noconfirm \
 echo "Instalando navegadores e aplicativos..."
 sudo pacman -S --noconfirm firefox falkon gimp steam
 
-# 9️ Instalar pacotes adicionais
+# 9 Instalar navegadores e aplicativos essenciais
+echo "instalando fontes necessárias"
+sudo pacman -S --noconfirm ttf-liberation ttf-dejavu noto-fonts noto-fonts-cjk noto-fonts-emoji
+
+# 10 Instalar pacotes adicionais
 echo "Instalando pacotes adicionais..."
 sudo pacman -S --noconfirm amdgpu_top bash-completion btop dolphin fakeroot \
     ffmpeg flatpak gamemode gamescope goverlay htop kcalc kcodecs kscreen \
