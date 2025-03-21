@@ -9,7 +9,7 @@ sudo pacman -Syu --noconfirm
 
 # 1️ Remover systemd-boot (se estiver instalado)
 if [ -d /boot/loader ]; then
-    echo "❌ Removendo systemd-boot..."
+    echo "Removendo systemd-boot..."
     sudo bootctl remove
     sudo rm -rf /boot/loader /boot/EFI/systemd
 fi
