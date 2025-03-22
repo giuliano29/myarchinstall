@@ -62,6 +62,7 @@ sudo pacman -S --noconfirm amdgpu_top bash-completion btop dolphin fakeroot \
     kvantum mesa-demos mesa-utils networkmanager-qt okular plasma-nm \
     plasma-pa powerdevil powerline-fonts sudo mangohud spectacle base-devel \
     timeshift power-profiles-daemon
+
 # instalar pacotes flatpak
 echo "instalando pacotes flatpak..."
 flatpak install -y flathub \
