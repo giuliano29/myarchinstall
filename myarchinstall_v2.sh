@@ -64,8 +64,14 @@ sudo pacman -S --noconfirm amdgpu_top bash-completion btop dolphin fakeroot \
     timeshift power-profiles-daemon
 # instalar pacotes flatpak
 echo "instalando pacotes flatpak..."
-flatpak install -y org.keepassxc.KeePassXC com.discordapp.Discord de.danielnoethen.butt flathub org.kde.kdenlive
-
+flatpak install -y flathub \
+  org.keepassxc.KeePassXC \
+  com.discordapp.Discord \
+  de.danielnoethen.butt \
+  org.kde.kdenlive \
+  net.davidotek.pupgui2 \
+  com.obsproject.Studio
+  
 # Atualizar GRUB após todas as mudanças
 echo "Atualizando GRUB..."
 sudo grub-mkconfig -o /boot/grub/grub.cfg
