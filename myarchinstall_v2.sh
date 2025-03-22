@@ -2,14 +2,14 @@
 
 set -e  # Para interromper a execução em caso de erro
 
-echo "\\U0001F680 Iniciando a instalação do KDE Plasma 6 mínimo no Arch Linux..."
+echo "\U0001F680 Iniciando a instalação do KDE Plasma 6 mínimo no Arch Linux..."
 
 # Atualizar o sistema antes de instalar qualquer coisa
 sudo pacman -Syu --noconfirm
 
 # 1️ Remover systemd-boot (se estiver instalado)
 if [ -d /boot/loader ]; then
-    echo "Removendo systemd-boot..."
+    echo "❌ Removendo systemd-boot..."
     sudo bootctl remove
     sudo rm -rf /boot/loader /boot/EFI/systemd
 fi
@@ -26,11 +26,11 @@ sudo pacman -S --noconfirm linux-zen linux-zen-headers
 
 # 4️ Instalar KDE Plasma 6 mínimo
 echo "Instalando KDE Plasma 6 mínimo..."
-sudo pacman -S --noconfirm plasma-desktop systemsettings kwin
+sudo pacman -S --noconfirm plasma-desktop systemsettings kwin xdg-desktop-portal-kde
 
 # 5️ Instalar gerenciador de login (SDDM)
 echo "Instalando e ativando SDDM..."
-sudo pacman -S --noconfirm sddm
+sudo pacman -S --noconfirm sddm sddm-kcm
 sudo systemctl enable sddm
 
 # 6️ Instalar suporte a Wayland e X11
@@ -49,16 +49,13 @@ sudo pacman -S --noconfirm \
 echo "Instalando navegadores e aplicativos..."
 sudo pacman -S --noconfirm firefox falkon gimp steam
 
-# 9 Instalar navegadores e aplicativos essenciais
-echo "instalando fontes necessárias"
-sudo pacman -S --noconfirm ttf-liberation ttf-dejavu noto-fonts noto-fonts-cjk noto-fonts-emoji
-
-# 10 Instalar pacotes adicionais
+# 9️ Instalar pacotes adicionais
 echo "Instalando pacotes adicionais..."
 sudo pacman -S --noconfirm amdgpu_top bash-completion btop dolphin fakeroot \
     ffmpeg flatpak gamemode gamescope goverlay htop kcalc kcodecs kscreen \
     kvantum mesa-demos mesa-utils networkmanager-qt okular plasma-nm \
-    plasma-pa powerdevil powerline-fonts sudo mangohud spectacle base-devel
+    plasma-pa powerdevil powerline-fonts sudo mangohud spectacle base-devel \
+    timeshift power-profiles-daemon
 
 # Atualizar GRUB após todas as mudanças
 echo "Atualizando GRUB..."
