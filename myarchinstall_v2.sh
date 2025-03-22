@@ -26,9 +26,9 @@ sudo pacman -S --noconfirm linux-zen linux-zen-headers
 
 # Instalar Drivers Amd
 sudo pacman -S --needed mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon \
-  vulkan-mesa-layers lib32-vulkan-mesa-layers amd-ucode \
-  lib32-libva-mesa-driver libva-mesa-driver \
-  xf86-video-amdgpu
+    vulkan-mesa-layers lib32-vulkan-mesa-layers amd-ucode \
+    lib32-libva-mesa-driver libva-mesa-driver \
+    xf86-video-amdgpu
 
 # Instalar KDE Plasma 6 mínimo
 echo "Instalando KDE Plasma 6 mínimo..."
