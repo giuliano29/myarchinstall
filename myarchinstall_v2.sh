@@ -9,35 +9,41 @@ sudo pacman -Syu --noconfirm
 
 # 1️ Remover systemd-boot (se estiver instalado)
 if [ -d /boot/loader ]; then
-    echo "❌ Removendo systemd-boot..."
+    echo "Removendo systemd-boot..."
     sudo bootctl remove
     sudo rm -rf /boot/loader /boot/EFI/systemd
 fi
 
-# 2️ Instalar e configurar o GRUB 2
+# Instalar e configurar o GRUB 2
 echo "Instalando e configurando GRUB 2..."
 sudo pacman -S --noconfirm grub efibootmgr
 sudo grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# 3️ Instalar Kernel Zen primeiro
+# Instalar Kernel Zen primeiro
 echo "Instalando Kernel Zen..."
 sudo pacman -S --noconfirm linux-zen linux-zen-headers
 
-# 4️ Instalar KDE Plasma 6 mínimo
-echo "Instalando KDE Plasma 6 mínimo..."
-sudo pacman -S --noconfirm plasma-desktop systemsettings kwin xdg-desktop-portal-kde
+# Instalar Drivers Amd
+sudo pacman -S --needed mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon \
+  vulkan-mesa-layers lib32-vulkan-mesa-layers amd-ucode \
+  lib32-libva-mesa-driver libva-mesa-driver \
+  xf86-video-amdgpu
 
-# 5️ Instalar gerenciador de login (SDDM)
+# Instalar KDE Plasma 6 mínimo
+echo "Instalando KDE Plasma 6 mínimo..."
+sudo pacman -S --noconfirm plasma-desktop systemsettings kwin xdg-desktop-portal-kde ufw
+
+# Instalar gerenciador de login (SDDM)
 echo "Instalando e ativando SDDM..."
 sudo pacman -S --noconfirm sddm sddm-kcm
 sudo systemctl enable sddm
 
-# 6️ Instalar suporte a Wayland e X11
+# Instalar suporte a Wayland e X11
 echo "Adicionando suporte a Wayland e XWayland..."
 sudo pacman -S --noconfirm qt6-wayland xorg-xwayland
 
-# 7️ Instalar bibliotecas multimídia
+# Instalar bibliotecas multimídia
 echo "Instalando bibliotecas multimídia..."
 sudo pacman -S --noconfirm \
     gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav gst-plugin-pipewire \
@@ -45,17 +51,20 @@ sudo pacman -S --noconfirm \
     lib32-gst-libav lib32-libpulse lib32-alsa-plugins lib32-alsa-lib \
     libidn11 lib32-libidn11
 
-# 8️ Instalar navegadores e aplicativos essenciais
+# Instalar navegadores e aplicativos essenciais
 echo "Instalando navegadores e aplicativos..."
 sudo pacman -S --noconfirm firefox falkon gimp steam
 
-# 9️ Instalar pacotes adicionais
+# Instalar pacotes adicionais
 echo "Instalando pacotes adicionais..."
 sudo pacman -S --noconfirm amdgpu_top bash-completion btop dolphin fakeroot \
     ffmpeg flatpak gamemode gamescope goverlay htop kcalc kcodecs kscreen \
     kvantum mesa-demos mesa-utils networkmanager-qt okular plasma-nm \
     plasma-pa powerdevil powerline-fonts sudo mangohud spectacle base-devel \
     timeshift power-profiles-daemon
+# instalar pacotes flatpak
+echo "instalando pacotes flatpak..."
+flatpak install -y org.keepassxc.KeePassXC com.discordapp.Discord de.danielnoethen.butt flathub org.kde.kdenlive
 
 # Atualizar GRUB após todas as mudanças
 echo "Atualizando GRUB..."
