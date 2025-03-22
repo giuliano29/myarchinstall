@@ -32,7 +32,7 @@ sudo pacman -S --needed mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon \
 
 # Instalar KDE Plasma 6 mínimo
 echo "Instalando KDE Plasma 6 mínimo..."
-sudo pacman -S --noconfirm plasma-desktop systemsettings kwin xdg-desktop-portal-kde ufw
+sudo pacman -S --noconfirm plasma-desktop systemsettings kwin xdg-desktop-portal-kde ufw wget
 
 # Instalar gerenciador de login (SDDM)
 echo "Instalando e ativando SDDM..."
