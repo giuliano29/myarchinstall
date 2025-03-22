@@ -53,7 +53,7 @@ sudo pacman -S --noconfirm \
 
 # Instalar navegadores e aplicativos essenciais
 echo "Instalando navegadores e aplicativos..."
-sudo pacman -S --noconfirm firefox falkon gimp steam
+sudo pacman -S --noconfirm firefox falkon gimp steam corectrl
 
 # Instalar pacotes adicionais
 echo "Instalando pacotes adicionais..."
