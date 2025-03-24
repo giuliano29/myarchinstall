@@ -13,8 +13,10 @@ echo "\U0001F680 Instalando GNOME aplicativos padrão..."
 pacman -S --noconfirm gnome timeshift gnome-control-center gnome-terminal \
     gnome-backgrounds gnome-tweaks gnome-shell-extensions gnome-themes-extra \
     gnome-calculator xdg-user-dirs-gtk dconf-editor file-roller gvfs gvfs-mtp \
-    gvfs-afc totem gnome-music gnome-sound-recorder pitivi lm_sensors
-
+    gvfs-afc totem gnome-music gnome-sound-recorder pitivi lm_sensors \
+    gnome-nettool gvfs gvfs-smb gnome-user-share flatpak vlc fwupd \
+    gnome-disk-utility gnome-calendar gnome-clocks nautilus-share nautilus-image-converter
+    
 echo "\U0001F680 Instalando codecs multimídia..."
 pacman -S --noconfirm ffmpeg gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav libdvdcss pipewire pipewire-pulse wireplumber
 
